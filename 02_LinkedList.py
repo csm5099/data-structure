@@ -82,9 +82,18 @@ class LinkedList:
       print(f"{tmp.data}")
       tmp = tmp.next
 
+  def search_node(self):
+    pass
+  
+  def delete_node(self):
+    pass
+  
+  def concatenate_list(self):
+    pass
+
 lkdlst = LinkedList()
-inputs = [2,7,3,5,8,1,4]
+inputs = [2,7,3,5,8,1,4,6]
 for item in inputs:
   lkdlst.do_sort_insert(item)
   lkdlst.print_list()
-  
+print(f"length of list is {len(lkdlst)}")
