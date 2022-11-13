@@ -30,14 +30,14 @@ class LinkedList:
     self.current = new_node
     self.no += 1
   
-  def add_node_to_first(self,data):
+  def add_node_to_first(self, data):
     print("first")
     new_node = self.create_node(data)
     new_node.next = self.head
     self.head = new_node
     self.no += 1
   
-  def add_node_to_middle(self,data):
+  def add_node_to_middle(self, data):
     print("middle")
     new_node = self.create_node(data)
     new_node.next = self.current.next
@@ -57,6 +57,7 @@ class LinkedList:
       if cursor.data > data:
         return cursor
       else:
+        self.current = cursor
         cursor = cursor.next
     return None
   
@@ -65,12 +66,15 @@ class LinkedList:
       self.add_node_to_empty(data)
     else:
       cursor = self.sort_asc(data)
+      
       if cursor == self.head:
         self.add_node_to_first(data)
-      elif cursor == None:
-        self.add_node_to_last(data)
-      else:
+        
+      elif cursor != None:
         self.add_node_to_middle(data)
+        
+      else:
+        self.add_node_to_last(data)
 
   def print_list(self):
     tmp = self.head
@@ -79,11 +83,8 @@ class LinkedList:
       tmp = tmp.next
 
 lkdlst = LinkedList()
-lkdlst.do_sort_insert(1)
-lkdlst.print_list()
-lkdlst.do_sort_insert(5)
-lkdlst.print_list()
-lkdlst.do_sort_insert(3)
-lkdlst.print_list()
-lkdlst.do_sort_insert(7)
-lkdlst.print_list()
+inputs = [2,7,3,5,8,1,4]
+for item in inputs:
+  lkdlst.do_sort_insert(item)
+  lkdlst.print_list()
+  
