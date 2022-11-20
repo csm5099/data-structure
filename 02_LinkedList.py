@@ -7,7 +7,7 @@ class LinkedList:
   def __init__(self):
     self.head = None
     self.tail = None
-    self.current = None
+    self.before = None
     self.no = 0
   
   def __len__(self):
@@ -27,7 +27,7 @@ class LinkedList:
     new_node = self.create_node(data)
     self.head = new_node
     self.tail = new_node
-    self.current = new_node
+    self.before = new_node
     self.no += 1
   
   def add_node_to_first(self, data):
@@ -40,8 +40,8 @@ class LinkedList:
   def add_node_to_middle(self, data):
     print("middle")
     new_node = self.create_node(data)
-    new_node.next = self.current.next
-    self.current.next = new_node
+    new_node.next = self.before.next
+    self.before.next = new_node
     self.no += 1
   
   def add_node_to_last(self, data):
@@ -57,7 +57,7 @@ class LinkedList:
       if cursor.data > data:
         return cursor
       else:
-        self.current = cursor
+        self.before = cursor
         cursor = cursor.next
     return None
   
@@ -76,24 +76,79 @@ class LinkedList:
       else:
         self.add_node_to_last(data)
 
-  def print_list(self):
+  def print_node_data(self):
     tmp = self.head
     while tmp is not None:
       print(f"{tmp.data}")
       tmp = tmp.next
 
-  def search_node(self):
-    pass
-  
-  def delete_node(self):
-    pass
-  
-  def concatenate_list(self):
-    pass
+  def search_node(self,target):
+    tmp = self.head
+    while tmp is not None:
+      if tmp.data == target:
+        return tmp
+      else:
+        self.before = tmp
+        tmp = tmp.next
+    return None
+
+  def delete_node(self, target):
+    print(f"delete data")
+    current = self.search_node(target)
+    
+    if self.is_list_empty():
+      return False
+    else:
+      if current.next != None:
+        # the target is in the start of this list
+        if current.next == self.head.next:
+          print("first")
+          self.head = current.next
+        # the target is in the end of this list
+        elif current.next == self.tail.next:
+          self.before.next = None
+        
+        # the target is in the middle of this list
+        else:
+          self.before = current.next
+      
+      else:
+        return False
+
+
+
+
+
+
 
 lkdlst = LinkedList()
 inputs = [2,7,3,5,8,1,4,6]
+
+# insert node and sort
 for item in inputs:
   lkdlst.do_sort_insert(item)
-  lkdlst.print_list()
+  lkdlst.print_node_data()
+
+print(f"-------------")
+# print length of the list
 print(f"length of list is {len(lkdlst)}")
+
+print(f"-------------")
+# print each nodes address
+node = lkdlst.head
+while node is not None:
+  print(f"{id(node)}")
+  node = node.next
+print(f"-------------")
+
+#search a data
+print(lkdlst.search_node(4))
+print(lkdlst.search_node(1))
+print(lkdlst.search_node(3))
+lkdlst.search_node(10)
+
+#delete data
+lkdlst.delete_node(1)
+lkdlst.print_node_data()
+lkdlst.delete_node(4)
+lkdlst.print_node_data()
