@@ -104,22 +104,15 @@ class LinkedList:
         if current.next == self.head.next:
           print("first")
           self.head = current.next
-        # the target is in the end of this list
-        elif current.next == self.tail.next:
-          self.before.next = None
-        
         # the target is in the middle of this list
         else:
-          self.before = current.next
+          print("middle")
+          self.before.next = current.next
       
+      # the target is in the end of this list
       else:
-        return False
-
-
-
-
-
-
+          print("last")
+          self.before.next = None
 
 lkdlst = LinkedList()
 inputs = [2,7,3,5,8,1,4,6]
@@ -151,4 +144,6 @@ lkdlst.search_node(10)
 lkdlst.delete_node(1)
 lkdlst.print_node_data()
 lkdlst.delete_node(4)
+lkdlst.print_node_data()
+lkdlst.delete_node(8)
 lkdlst.print_node_data()
