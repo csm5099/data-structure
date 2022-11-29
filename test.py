@@ -1,16 +1,13 @@
-obj1 = "사과"
-obj2 = "바나나"
+a, b = map(int, input().split())
 
-id_obj1 = id(obj1)
-id_obj2 = id(obj2)
+cnt = 0
+tmp = a/(cnt+1)**0.5+cnt
 
-print(f"{obj1} {obj2}")
-print(f"{id_obj1} {id_obj2}")
-
-obj1 = obj2
-
-id_obj1 = id(obj1)
-id_obj2 = id(obj2)
-
-print(f"{obj1} {obj2}")
-print(f"{id_obj1} {id_obj2}")
+while True:
+    cnt += 1
+    if tmp > a/(cnt+1)**0.5+cnt:
+        tmp = a/(cnt+1)**0.5+cnt
+    else:
+        break
+    
+print(tmp)
